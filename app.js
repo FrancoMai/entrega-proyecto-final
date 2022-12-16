@@ -1,59 +1,6 @@
-const stockProductos = [
-  {
-    id: 1,
-    nombre: "Phanton",
-    stock: true,
-    marca: "PACO RABANNE",
-    precio:"25500",
-    cantidad: 1,
-    img: "./img/imagen1.png"
-},
-{
-    id: 2,
-    nombre: "Smiling Men",
-    stock: false,
-    marca: "YSV",
-    precio:"17500",
-    cantidad: 1,
-    img: "./img/imagen2.png"
-},
-{
-    id: 3,
-    nombre: "Smiling Women",
-    stock: true,
-    marca: "YSV",
-    precio:"17500",
-    cantidad: 1,
-    img: "./img/imagen3.png"
-},
-{
-    id: 4,
-    nombre: "Memori Cédre Secret",
-    stock: true,
-    marca: "KENZO",
-    precio:"15000",
-    cantidad: 1,
-    img: "./img/imagen4.png"
-},
-{
-    id: 5,
-    nombre: "My Way",
-    stock: false,
-    marca: "GIORGIO ARMANI",
-    precio:"20500",
-    cantidad: 1,
-    img: "./img/imagen5.png"
-},
-{
-    id: 6,
-    nombre: "Kenzo Flower",
-    stock: true,
-    marca: "KENZO",
-    precio:"12500",
-    cantidad: 1,
-    img: "./img/imagen6.png"
-}
-];
+fetch ('./productos.json')
+.then(respuesta => respuesta.json())
+.then(stockProductos => {
 let carrito = [];
 
 const contenedor = document.querySelector("#contenedor");
@@ -74,7 +21,8 @@ document.addEventListener("DOMContentLoaded", () => {
   carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
   mostrarCarrito();
-  document.querySelector("#activarFuncion").click(procesarPedido);
+  document.querySelector("#activarFuncion")
+  .click(procesarPedido);
 });
 
 
@@ -155,8 +103,7 @@ const mostrarCarrito = () => {
       <p>Cantidad :${cantidad}</p>
       <button class="btn btn-danger" onclick="eliminarProducto(${id})">Eliminar producto</button>
     </div>
-  </div>
-      
+  </div>  
   
       `;
     });
@@ -218,17 +165,8 @@ function procesarPedido() {
 
   function enviarCompra(e){
     e.preventDefault()
-//    const cliente = document.querySelector('#cliente').value
-//    const email = document.querySelector('#correo').value
+  }
 
-//    if(email === '' || cliente == ''){
-//      Swal.fire({
-//        title: "¡Debes completar tu email y nombre!",
-//        text: "Rellena el formulario",
-//        icon: "error",
-//        confirmButtonText: "Aceptar",
-    }
-//  } else { 
    const btncompra = document.getElementById('button');
    btncompra.addEventListener("click", alertExito);
    btncompra.addEventListener("click", renderizarCarrito);
@@ -266,4 +204,6 @@ function renderizarCarrito() {
        
 
   })
+});
+
   
