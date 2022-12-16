@@ -64,6 +64,7 @@ const activarFuncion = document.querySelector("#activarFuncion");
 const procesarCompra = document.querySelector("#procesarCompra");
 const totalProceso = document.querySelector("#totalProceso");
 const a = document.querySelector('#procesar-pago')
+const listaCompra = document.querySelector("#lista-compra tbody");
 
 if (activarFuncion) {
   activarFuncion.addEventListener("click", procesarPedido);
@@ -111,7 +112,7 @@ stockProductos.forEach((prod) => {
       <p class="card-marca">${marca}</p>
       <p class="card-text">Precio: ${precio}</p>
       <p class="card-text">Cantidad: ${cantidad}</p>
-      <button class="btn btn-primary" onclick="agregarProducto(${id})">Comprar Producto</button>
+      <button class="btn btn-primary" id="btnComprar" onclick="agregarProducto(${id})">Comprar Producto</button>
     </div>
   </div>
     `;
@@ -192,7 +193,7 @@ function eliminarProducto(id) {
 }
 function procesarPedido() {
   carrito.forEach((prod) => {
-    const listaCompra = document.querySelector("#lista-compra tbody");
+    
     const { id, nombre, precio, img, marca, cantidad } = prod;
     if (listaCompra) {
       const row = document.createElement("tr");
@@ -229,8 +230,10 @@ function procesarPedido() {
     }
 //  } else { 
    const btncompra = document.getElementById('button');
-   btncompra.addEventListener("click", alertExito)
-   btncompra.addEventListener("click", renderizarCarrito)
+   btncompra.addEventListener("click", alertExito);
+   btncompra.addEventListener("click", renderizarCarrito);
+   const btnCarrito = document.getElementById('btnComprar');
+   btnCarrito.addEventListener("click", alertCarrito);
    
 
   function alertExito() {
@@ -242,8 +245,19 @@ function procesarPedido() {
     });
 };
 
-function renderizarCarrito(){
-  carritoContenedor.innerHTML = ''
+function alertCarrito() {
+  Swal.fire({
+    title: "¡Producto agregado al carrito!",
+    text: "",
+    icon: "success",
+  });
+};
+
+function renderizarCarrito() {
+  carrito.splice(0, carrito.length);
+  carritoContenedor.textContent = carrito.length;
+  localStorage.setItem("carrito", JSON.stringify(carrito))
+  listaCompra.innerHTML = ""
 }
 
    document.getElementById('procesar-pago')
@@ -252,37 +266,4 @@ function renderizarCarrito(){
        
 
   })
-
-  //  const serviceID = 'default_service';
-  //  const templateID = 'template_qxwi0jn';
-
-  //  emailjs.sendForm(serviceID, templateID, this)
-  //   .then(() => {
-  //     btn.value = 'Finalizar compra';
-  //     alert('Correo enviado!');
-  //   }, (err) => {
-  //     btn.value = 'Finalizar compra';
-  //     alert(JSON.stringify(err));
-  //   });
-  // const alertExito = document.createElement('p')
-  // alertExito.classList.add('alert', 'alerta', 'd-block', 'text-center', 'col-12', 'mt-2', 'alert-success')
-  // alertExito.textContent = 'Compra realizada correctamente'
-  // console.log(alertExito)
-    
-  //  const spinner = document.querySelector('#spinner')
-  //  spinner.classList.add('d-flex')
-  //  spinner.classList.remove('d-none')
-
-  //  setTimeout(() => {
-  //    spinner.classList.remove('d-flex')
-  //    spinner.classList.add('d-none')
-
-
-  //     setTimeout(() => {
-  //       alertExito.remove()
-  //     }, 3000)
-
-  //   }, 3000)
-   
-  
   
