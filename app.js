@@ -1,84 +1,58 @@
 const stockProductos = [
   {
     id: 1,
-    nombre: "Crash Bandicoot",
+    nombre: "Phanton",
+    stock: true,
+    marca: "PACO RABANNE",
+    precio:"25500",
     cantidad: 1,
-    desc: "Juego plataformero, niveles dificiles",
-    precio: 1200,
-    img: "img/Crash.jpg",
-  },
-  {
+    img: "./img/imagen1.png"
+},
+{
     id: 2,
-    nombre: "Mortal Kombat X",
+    nombre: "Smiling Men",
+    stock: false,
+    marca: "YSV",
+    precio:"17500",
     cantidad: 1,
-    desc: "Luchas con los mejores graficos",
-    precio: 1500,
-    img: "img/mortal.jpg",
-  },
-  {
+    img: "./img/imagen2.png"
+},
+{
     id: 3,
-    nombre: "Pac Man",
+    nombre: "Smiling Women",
+    stock: true,
+    marca: "YSV",
+    precio:"17500",
     cantidad: 1,
-    desc: "Juego plataformero, niveles basicos",
-    precio: 1570,
-    img: "img/pacman.jpg",
-  },
-  {
+    img: "./img/imagen3.png"
+},
+{
     id: 4,
-    nombre: "Dragon Ball Xenoverse",
+    nombre: "Memori Cédre Secret",
+    stock: true,
+    marca: "KENZO",
+    precio:"15000",
     cantidad: 1,
-    desc: "Vive la experiencia dragon ball",
-    precio: 1000,
-    img: "img/dragonball.jpg",
-  },
-  {
+    img: "./img/imagen4.png"
+},
+{
     id: 5,
-    nombre: "Naruto Ninja Storm 4",
+    nombre: "My Way",
+    stock: false,
+    marca: "GIORGIO ARMANI",
+    precio:"20500",
     cantidad: 1,
-    desc: "La historia de Naruto",
-    precio: 1200,
-    img: "img/naruto.jpg",
-  },
-  {
+    img: "./img/imagen5.png"
+},
+{
     id: 6,
-    nombre: "Shingeki Final Attack",
+    nombre: "Kenzo Flower",
+    stock: true,
+    marca: "KENZO",
+    precio:"12500",
     cantidad: 1,
-    desc: "Eren Jeager vuelve en formato gamer...",
-    precio: 1200,
-    img: "img/shingeki.jpg",
-  },
-  {
-    id: 7,
-    nombre: "League of Legends",
-    cantidad: 1,
-    desc: "No compres esto por tu bien",
-    precio: 1400,
-    img: "img/league.jpg",
-  },
-  {
-    id: 8,
-    nombre: "Call Of Duty Warzone",
-    cantidad: 1,
-    desc: "Dispara como nunca",
-    precio: 1200,
-    img: "img/callduty.jpg",
-  },
-  {
-    id: 9,
-    nombre: "Fifa 2019",
-    cantidad: 1,
-    desc: "Juego de futbol",
-    precio: 1400,
-    img: "img/fifa.jpg",
-  },
-  {
-    id: 10,
-    nombre: "Fornite",
-    cantidad: 1,
-    desc: "Battle Royale",
-    precio: 1200,
-    img: "img/fornite.jpg",
-  },
+    img: "./img/imagen6.png"
+}
 ];
 let carrito = [];
 
@@ -127,13 +101,14 @@ if (procesarCompra) {
 }
 
 stockProductos.forEach((prod) => {
-  const { id, nombre, precio, img, cantidad } = prod;
+  const { id, nombre, precio, img, marca, cantidad } = prod;
   if (contenedor) {
     contenedor.innerHTML += `
     <div class="card mt-3" style="width: 18rem;">
     <img class="card-img-top mt-2" src="${img}" alt="Card image cap">
     <div class="card-body">
       <h5 class="card-title">${nombre}</h5>
+      <p class="card-marca">${marca}</p>
       <p class="card-text">Precio: ${precio}</p>
       <p class="card-text">Cantidad: ${cantidad}</p>
       <button class="btn btn-primary" onclick="agregarProducto(${id})">Comprar Producto</button>
@@ -165,20 +140,21 @@ const mostrarCarrito = () => {
   if (modalBody) {
     modalBody.innerHTML = "";
     carrito.forEach((prod) => {
-      const { id, nombre, precio, img, cantidad } = prod;
+      const { id, nombre, precio, img, marca, cantidad } = prod;
       console.log(modalBody);
       modalBody.innerHTML += `
-      <div class="modal-contenedor">
-        <div>
+    <div class="modal-contenedor">
+      <div>
         <img class="img-fluid img-carrito" src="${img}"/>
-        </div>
-        <div>
-        <p>Producto: ${nombre}</p>
+      </div>
+    <div>
+      <p>Producto: ${nombre}</p>
+      <p>Producto: ${marca}</p>
       <p>Precio: ${precio}</p>
       <p>Cantidad :${cantidad}</p>
       <button class="btn btn-danger" onclick="eliminarProducto(${id})">Eliminar producto</button>
-        </div>
-      </div>
+    </div>
+  </div>
       
   
       `;
@@ -217,14 +193,15 @@ function eliminarProducto(id) {
 function procesarPedido() {
   carrito.forEach((prod) => {
     const listaCompra = document.querySelector("#lista-compra tbody");
-    const { id, nombre, precio, img, cantidad } = prod;
+    const { id, nombre, precio, img, marca, cantidad } = prod;
     if (listaCompra) {
       const row = document.createElement("tr");
       row.innerHTML += `
               <td>
               <img class="img-fluid img-carrito" src="${img}"/>
               </td>
-              <td>${nombre}</td>
+            <td>${nombre}</td>
+            <td>${marca}</td>
             <td>${precio}</td>
             <td>${cantidad}</td>
             <td>${precio * cantidad}</td>
@@ -250,10 +227,11 @@ function procesarPedido() {
 //        icon: "error",
 //        confirmButtonText: "Aceptar",
     }
-//  } else {
-
+//  } else { 
    const btncompra = document.getElementById('button');
    btncompra.addEventListener("click", alertExito)
+   btncompra.addEventListener("click", renderizarCarrito)
+   
 
   function alertExito() {
     Swal.fire({
@@ -262,18 +240,18 @@ function procesarPedido() {
       icon: "success",
       confirmButtonText: "Aceptar",
     });
+};
 
+function renderizarCarrito(){
+  carritoContenedor.innerHTML = ''
+}
 
-    
-    
-  };
+   document.getElementById('procesar-pago')
+    .addEventListener('submit', function(event) {
+      event.preventDefault();
+       
 
-
-//   document.getElementById('procesar-pago')
-//    .addEventListener('submit', function(event) {
-//      event.preventDefault();
-
-//  })
+  })
 
   //  const serviceID = 'default_service';
   //  const templateID = 'template_qxwi0jn';
