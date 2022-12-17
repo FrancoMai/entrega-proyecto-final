@@ -1,6 +1,59 @@
-fetch ('./productos.json')
-.then(respuesta => respuesta.json())
-.then(stockProductos => {
+const stockProductos = [
+  {
+    id: 1,
+    nombre: "Phanton",
+    stock: true,
+    marca: "PACO RABANNE",
+    precio:"17500",
+    cantidad: 1,
+    img: "./img/imagen1.png"
+},
+{
+    id: 2,
+    nombre: "Smiling Men",
+    stock: false,
+    marca: "YSV",
+    precio:"17500",
+    cantidad: 1,
+    img: "./img/imagen2.png"
+},
+{
+    id: 3,
+    nombre: "Smiling Women",
+    stock: true,
+    marca: "YSV",
+    precio:"17500",
+    cantidad: 1,
+    img: "./img/imagen3.png"
+},
+{
+    id: 4,
+    nombre: "Memori Cédre Secret",
+    stock: true,
+    marca: "KENZO",
+    precio:"17500",
+    cantidad: 1,
+    img: "./img/imagen4.png"
+},
+{
+    id: 5,
+    nombre: "My Way",
+    stock: false,
+    marca: "GIORGIO ARMANI",
+    precio:"17500",
+    cantidad: 1,
+    img: "./img/imagen5.png"
+},
+{
+    id: 6,
+    nombre: "Kenzo Flower",
+    stock: true,
+    marca: "KENZO",
+    precio:"17500",
+    cantidad: 1,
+    img: "./img/imagen6.png"
+}
+];
 let carrito = [];
 
 const contenedor = document.querySelector("#contenedor");
@@ -12,6 +65,7 @@ const procesarCompra = document.querySelector("#procesarCompra");
 const totalProceso = document.querySelector("#totalProceso");
 const a = document.querySelector('#procesar-pago')
 const listaCompra = document.querySelector("#lista-compra tbody");
+
 
 if (activarFuncion) {
   activarFuncion.addEventListener("click", procesarPedido);
@@ -49,6 +103,8 @@ if (procesarCompra) {
   });
 }
 
+
+
 stockProductos.forEach((prod) => {
   const { id, nombre, precio, img, marca, cantidad } = prod;
   if (contenedor) {
@@ -66,6 +122,7 @@ stockProductos.forEach((prod) => {
     `;
   }
 });
+
 
 const agregarProducto = (id) => {
   const existe = carrito.some(prod => prod.id === id)
@@ -104,7 +161,7 @@ const mostrarCarrito = () => {
       <button class="btn btn-danger" onclick="eliminarProducto(${id})">Eliminar producto</button>
     </div>
   </div>  
-  
+
       `;
     });
   }
@@ -204,6 +261,6 @@ function renderizarCarrito() {
        
 
   })
-});
+
 
   

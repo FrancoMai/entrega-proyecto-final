@@ -3,7 +3,7 @@
     "id": 1,
     "nombre": "Phanton",
     "marca": "PACO RABANNE",
-    "precio":"25500",
+    "precio": 25500,
     "cantidad": 1,
     "img": "./img/imagen1.png"
 },
@@ -11,7 +11,7 @@
     "id": 2,
     "nombre": "Smiling Men",
     "marca": "YSV",
-    "precio":"17500",
+    "precio": 17500,
     "cantidad": 1,
     "img": "./img/imagen2.png"
 },
@@ -19,7 +19,7 @@
     "id": 3,
     "nombre": "Smiling Women",
     "marca": "YSV",
-    "precio":"17500",
+    "precio": 17500,
     "cantidad": 1,
     "img": "./img/imagen3.png"
 },
@@ -27,7 +27,7 @@
     "id": 4,
     "nombre": "Memori Cédre Secret",
     "marca": "KENZO",
-    "precio":"15000",
+    "precio": 15000,
     "cantidad": 1,
     "img": "./img/imagen4.png"
 },
@@ -35,7 +35,7 @@
     "id": 5,
     "nombre": "My Way",
     "marca": "GIORGIO ARMANI",
-    "precio":"20500",
+    "precio": 20500,
     "cantidad": 1,
     "img": "./img/imagen5.png"
 },
@@ -43,7 +43,7 @@
     "id": 6,
     "nombre": "Kenzo Flower",
     "marca": "KENZO",
-    "precio":"12500",
+    "precio": 12500,
     "cantidad": 1,
     "img": "./img/imagen6.png"
 }
